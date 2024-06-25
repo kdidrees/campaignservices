@@ -28,12 +28,16 @@ const campaignSchema = new mongoose.Schema({
   advSetting: {
     frequencyImpression: Number,
     cappingImpression: String,
-    nocappingImpression: false,
+    nocappingImpression: { type: Boolean, default: false },
     frequencyClick: Number,
     cappingClick: String,
-    nocappingClick: false,
-    proxyFilter: false,
+    nocappingClick: { type: Boolean, default: false },
+    proxyFilter: { type: Boolean, default: false },
     campaignSchedule: [String],
     tracking: String,
   },
 });
+
+const campaignModel = mongoose.model("campaigns", campaignSchema);
+
+module.exports = campaignModel;

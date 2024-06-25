@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
 const dotenv = require("dotenv");
+const campaignRoute = require("./routes/campaign")
 
 // dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(
 );
 
 
+
 // connect database here
 
 connectDatabase();
@@ -31,6 +33,11 @@ async function connectDatabase() {
     console.log(error);
   }
 }
+
+
+// use the route here 
+app.use("/api/campaigns",campaignRoute);
+
 
 
 
