@@ -1,10 +1,13 @@
 const express = require("express");
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 const campaignSchema = new mongoose.Schema({
   general: {
+    name:String,
     adFormat: String,
+    imageSize:String,
     feed: String,
+    destinationUrl:String,
     afterVerification: String,
     imageSize: String,
     creatives: [String], // assuming creatives are stored as an array of strings
@@ -30,7 +33,7 @@ const campaignSchema = new mongoose.Schema({
     cappingImpression: String,
     nocappingImpression: { type: Boolean, default: false },
     frequencyClick: Number,
-    cappingClick: String,
+    cappingClick: String,   
     nocappingClick: { type: Boolean, default: false },
     proxyFilter: { type: Boolean, default: false },
     campaignSchedule: [String],
