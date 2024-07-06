@@ -6,7 +6,12 @@ const campaignSchema = new mongoose.Schema({
     feed: { type: String },
     afterVerification: { type: String },
     imageSize: { type: String },
-    creatives: [{ image: { type: Object }, targetingURL: { type: String } }],
+    creatives: [
+      {
+        image: { type: String }, 
+        targetingURL: { type: String },
+      },
+    ],
     campaignName: { type: String },
     destinationURL: { type: String },
   },
