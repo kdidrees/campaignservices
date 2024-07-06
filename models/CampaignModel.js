@@ -1,46 +1,38 @@
-const express = require("express");
 const mongoose = require("mongoose");
 
 const campaignSchema = new mongoose.Schema({
   general: {
-    name:String,
-    adFormat: String,
-    imageSize:String,
-    feed: String,
-    destinationUrl:String,
-    afterVerification: String,
-    imageSize: String,
-    creatives: [String], // assuming creatives are stored as an array of strings
+    adFormat: { type: String },
+    feed: { type: String },
+    afterVerification: { type: String },
+    imageSize: { type: String },
+    creatives: [{ image: { type: Object }, targetingURL: { type: String } }],
+    campaignName: { type: String },
+    destinationURL: { type: String },
   },
-  pricing: {
-    pricingModel: String,
-    biddingValue: Number,
-    campaignBudget: Number,
-    dailyBudget: Number,
-    pricingModel: String,
+  pricings: {
+    pricingModel: { type: String },
+    biddingValue: { type: Number },
+    campaignBudget: { type: Number },
+    dailyBudget: { type: Number },
   },
   targetings: {
-    geo: [String],
-    devices: [String],
-    operatingSystem: [String],
-    browser: [String],
-    connectionType: [String],
-    language: [String],
-    iprange: String,
+    geo: { type: [String] },
+    device: { type: [String] },
+    os: { type: [String] },
+    browser: { type: [String] },
+    connectionType: { type: [String] },
+    language: { type: [String] },
+    ipRange: { type: [String] },
   },
-  advSetting: {
-    frequencyImpression: Number,
-    cappingImpression: String,
-    nocappingImpression: { type: Boolean, default: false },
-    frequencyClick: Number,
-    cappingClick: String,   
-    nocappingClick: { type: Boolean, default: false },
-    proxyFilter: { type: Boolean, default: false },
-    campaignSchedule: [String],
-    tracking: String,
+  advSettings: {
+    proxyFilter: { type: String },
+    buyingType: { type: String },
+    frequenctImpression: { type: Number },
+    cappingImpression: { type: Number },
+    frequencyClick: { type: Number },
+    cappingClick: { type: Number },
   },
 });
 
-const campaignModel = mongoose.model("campaigns", campaignSchema);
-
-module.exports = campaignModel;
+module.exports = mongoose.model("Campaigns", campaignSchema);
