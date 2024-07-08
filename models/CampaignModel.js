@@ -4,7 +4,9 @@ const campaignSchema = new mongoose.Schema({
   general: {
     adFormat: { type: String },
     feed: { type: String },
+    subFeedMainstream:{type:String},
     afterVerification: { type: String },
+    scheduledDateTime:{type:String},
     imageSize: { type: String },
     creatives: [
       {
