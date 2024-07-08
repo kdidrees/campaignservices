@@ -4,28 +4,33 @@ const campaignModel = require("../models/CampaignModel");
 
 exports.createCampaign = async (req, res) => {
   try {
+  
+
+    console.log(req.body);
+    console.log(req.files)
+
+
     // extract the data from request body
-    const { general, pricings, targetings, advSettings } = req.body;
+    const { general, pricings, targetings, advSetting } = req.body;
 
-    // process file uploads if there are any
+    // console.log(general?.creatives);
 
-    console.log(general?.creatives);
+ // Parse general data fields
+ const parsedGeneral = {
+  ...JSON.parse(general),
+  creatives: req.files.map((file, index) => ({
+    file: file.path,
+    targetingURL: req.body[`creativeTargetingURL[${index}]`]
+  }))
+};
 
-    let images = [];
-    if (general.creatives && general.creatives.length > 0) {
-      images = general.creatives.map((creative) => creative.file.path);
-    }
-
-    // create a new campaign instance with both data and file paths
-    const newCampaign = new campaignModel({
-      general: {
-        ...general,
-        creatives: images, // store only paths
-      },
-      pricings,
-      targetings,
-      advSettings,
-    });
+// Create a new campaign instance with both data and file paths
+const newCampaign = new campaignModel({
+  general: parsedGeneral,
+  pricings: pricings ? JSON.parse(pricings) : {},
+  targetings: targetings ? JSON.parse(targetings) : {},
+  advSetting: advSetting ? JSON.parse(advSetting) : {}
+});
 
     // save the campaign to the database
     const campaign = await newCampaign.save();
