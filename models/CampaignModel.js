@@ -6,7 +6,7 @@ const campaignSchema = new mongoose.Schema({
     feed: { type: String },
     subFeedMainstream:{type:String},
     afterVerification: { type: String },
-    scheduledDateTime:{type:String},
+    scheduledDateTime:{type:Date},
     imageSize: { type: String },
     creatives: [
       {
