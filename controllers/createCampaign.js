@@ -3,7 +3,7 @@ const moment = require("moment");
 
 exports.createCampaign = async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     // console.log(req.files);
 
     const scheduledDateTimeString = "12/07/2024, 12:20:00 AM";
@@ -12,18 +12,27 @@ exports.createCampaign = async (req, res) => {
     // Extract the data from request body
     const { general, pricings, targetings, advSettings } = req.body;
     
-    // console.log("Scheduled Date Time:", (general.scheduledDateTime));
-
     
+      // Parse the general field if it's a string
+      if (typeof general === 'string') {
+      var  general2 = JSON.parse(general);
+    }
+
+    console.log(general2 , "genreral222222222222222")
     // Parse general data fields
     const parsedGeneral = {
-      ...JSON.parse(general),
+      ...general2,
       creatives: req.files.map((file, index) => ({
         image: file.filename,  // Save only the filename
         targetingURL: req.body[`creativeTargetingURL[${index}]`]
       })),
-      scheduledDateTime: moment(scheduledDateTime,"DD/MM/YYYY, hh:mm:ss A").toDate()
+      scheduledDateTime: moment(general2.scheduledDateTime,"DD/MM/YYYY, hh:mm:ss A").toDate()
     };
+
+    // console.log(parsedGeneral , "Parsssss")
+    
+    // console.log("Scheduled Date Time:", ((parsedGeneral?.scheduledDateTime)));
+
 
     // Create a new campaign instance with both data and file paths
     const newCampaign = new campaignModel({
