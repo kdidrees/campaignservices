@@ -6,7 +6,6 @@ exports.createCampaign = async (req, res) => {
     // console.log(req.body);
     // console.log(req.files);
 
-  
     // Extract the data from request body
     const { general, pricings, targetings, advSettings } = req.body;
     
