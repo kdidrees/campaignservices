@@ -6,9 +6,7 @@ exports.createCampaign = async (req, res) => {
     // console.log(req.body);
     // console.log(req.files);
 
-    const scheduledDateTimeString = "12/07/2024, 12:20:00 AM";
-
-
+  
     // Extract the data from request body
     const { general, pricings, targetings, advSettings } = req.body;
     
@@ -29,11 +27,7 @@ exports.createCampaign = async (req, res) => {
       scheduledDateTime: moment(general2.scheduledDateTime,"DD/MM/YYYY, hh:mm:ss A").toDate()
     };
 
-    // console.log(parsedGeneral , "Parsssss")
-    
-    // console.log("Scheduled Date Time:", ((parsedGeneral?.scheduledDateTime)));
-
-
+   
     // Create a new campaign instance with both data and file paths
     const newCampaign = new campaignModel({
       general: parsedGeneral,
