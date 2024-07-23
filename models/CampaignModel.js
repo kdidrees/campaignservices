@@ -34,7 +34,7 @@ const campaignSchema = new mongoose.Schema({
   },
   advSettings: {
     proxyFilter: { type: String },
-    buyingType: { type: String },
+    buyingType: { type: String }, 
     frequenctImpression: { type: Number },
     cappingImpression: { type: Number },
     frequencyClick: { type: Number },
